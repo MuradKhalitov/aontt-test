@@ -1,0 +1,4 @@
+GET http://localhost:8080/organizations
+
+### Запрос с параметром search
+GET http://localhost:8080/organizations?search=example
