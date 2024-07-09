@@ -5,30 +5,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="001-create-organization-table" author="Murad">
+    <changeSet id="002-create-branch-table" author="Murad">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="organization"/>
+                <tableExists tableName="branch"/>
             </not>
         </preConditions>
-        <createTable tableName="organization">
+        <createTable tableName="branch">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="full_name" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="short_name" type="varchar(255)"/>
-            <column name="inn" type="varchar(12)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="ogrn" type="varchar(13)">
-                <constraints nullable="false" unique="true"/>
-            </column>
             <column name="postal_address" type="varchar(255)"/>
-            <column name="legal_address" type="varchar(255)"/>
             <column name="ceo_full_name" type="varchar(255)"/>
             <column name="ceo_birth_date" type="date"/>
+            <column name="organization_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+        <addForeignKeyConstraint
+                baseTableName="branch"
+                baseColumnNames="organization_id"
+                constraintName="fk_branch_organization"
+                referencedTableName="organization"
+                referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

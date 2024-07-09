@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
+
 /**
  * DTO (Data Transfer Object) для организации.
  */
@@ -19,5 +21,6 @@ public class OrganizationDTO {
     private String legalAddress;
     private String ceoFullName;
     private LocalDate ceoBirthDate;
+    private List<BranchDTO> branches;
 }
 

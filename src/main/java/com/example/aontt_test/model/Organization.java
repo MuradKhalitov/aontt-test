@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
+
 /**
  * Модель организации.
  */
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Organization {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +35,8 @@ public class Organization {
 
     private String ceoFullName;
     private LocalDate ceoBirthDate;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<Branch> branches;
 }
 

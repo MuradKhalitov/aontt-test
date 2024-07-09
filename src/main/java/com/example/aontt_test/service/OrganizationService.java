@@ -1,13 +1,17 @@
 package com.example.aontt_test.service;
 
+import com.example.aontt_test.dto.BranchDTO;
 import com.example.aontt_test.dto.OrganizationDTO;
 import com.example.aontt_test.model.Organization;
+import com.example.aontt_test.model.Branch;
 import com.example.aontt_test.repository.OrganizationRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
  * Сервис для работы с организациями.
  */
@@ -16,6 +20,9 @@ public class OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
     /**
      * Получить список всех организаций в виде DTO.
      *
@@ -26,6 +33,7 @@ public class OrganizationService {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
     /**
      * Поиск организаций по полному названию (игнорируя регистр).
      *
@@ -37,6 +45,7 @@ public class OrganizationService {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
     /**
      * Получить организацию по её идентификатору.
      *
@@ -48,6 +57,7 @@ public class OrganizationService {
                 .map(this::convertToDTO)
                 .orElse(null);
     }
+
     /**
      * Преобразовать сущность Organization в DTO.
      *
@@ -55,16 +65,12 @@ public class OrganizationService {
      * @return DTO организации
      */
     private OrganizationDTO convertToDTO(Organization organization) {
-        OrganizationDTO dto = new OrganizationDTO();
-        dto.setId(organization.getId());
-        dto.setFullName(organization.getFullName());
-        dto.setShortName(organization.getShortName());
-        dto.setInn(organization.getInn());
-        dto.setOgrn(organization.getOgrn());
-        dto.setPostalAddress(organization.getPostalAddress());
-        dto.setLegalAddress(organization.getLegalAddress());
-        dto.setCeoFullName(organization.getCeoFullName());
-        dto.setCeoBirthDate(organization.getCeoBirthDate());
+        OrganizationDTO dto = modelMapper.map(organization, OrganizationDTO.class);
+        // Преобразование списка филиалов в список BranchDTO
+        List<BranchDTO> branchDTOs = organization.getBranches().stream()
+                .map(branch -> modelMapper.map(branch, BranchDTO.class))
+                .collect(Collectors.toList());
+        dto.setBranches(branchDTOs);
         return dto;
     }
 }
