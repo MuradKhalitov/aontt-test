@@ -84,7 +84,16 @@ GET /organizations/1
         "postalAddress": "г. Москва, ул. Пушкина, д. Колотушкина",
         "legalAddress": "г. Москва, ул. Ленина, д. Сталина",
         "ceoFullName": "Иванов Иван Иванович",
-        "ceoBirthDate": "1975-05-15"
+        "ceoBirthDate": "1975-05-15",
+        "branches": [
+            {
+                "id": 1,
+                "branchName": "Филиал 1",
+                "postalAddress": "г. Москва, ул. Лермонтова, д. 12",
+                "ceoFullName": "Сидоров Сидор Сидорович",
+                "ceoBirthDate": "1978-07-20"
+            }
+        ]
     },
     {
         "id": 2,
@@ -95,9 +104,16 @@ GET /organizations/1
         "postalAddress": "г. Санкт-Петербург, ул. Комсомольская, д. 1",
         "legalAddress": "г. Санкт-Петербург, ул. Красноармейская, д. 10",
         "ceoFullName": "Петров Петр Петрович",
-        "ceoBirthDate": "1980-10-20"
-    }
-]
+        "ceoBirthDate": "1980-10-20",
+        "branches": [
+            {
+                "id": 2,
+                "branchName": "Филиал 2",
+                "postalAddress": "г. Санкт-Петербург, ул. Невская, д. 14",
+                "ceoFullName": "Кузнецов Кузьма Кузьмич",
+                "ceoBirthDate": "1985-11-30"
+            }
+        ]
 Ответ на запрос информации об организации:
 
 {
@@ -109,5 +125,14 @@ GET /organizations/1
     "postalAddress": "г. Москва, ул. Пушкина, д. Колотушкина",
     "legalAddress": "г. Москва, ул. Ленина, д. Сталина",
     "ceoFullName": "Иванов Иван Иванович",
-    "ceoBirthDate": "1975-05-15"
+    "ceoBirthDate": "1975-05-15",
+    "branches": [
+        {
+            "id": 1,
+            "branchName": "Филиал 1",
+            "postalAddress": "г. Москва, ул. Лермонтова, д. 12",
+            "ceoFullName": "Сидоров Сидор Сидорович",
+            "ceoBirthDate": "1978-07-20"
+        }
+    ]
 }
